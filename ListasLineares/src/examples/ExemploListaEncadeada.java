@@ -1,6 +1,6 @@
 package examples;
 
-import datastructures.IteradorListaEncadeada;
+import datastructures.Iterador;
 import datastructures.ListaEncadeada;
 
 public class ExemploListaEncadeada {
@@ -11,7 +11,7 @@ public class ExemploListaEncadeada {
 		lista.append(3);
 		lista.prepend(1);	
 		imprimeLista(lista);
-		IteradorListaEncadeada<Integer> iterador = lista.iterator();
+		Iterador<Integer> iterador = lista.iterator();
 		iterador.next();
 		iterador.insert(2);
 		imprimeLista(lista);
