@@ -1,42 +1,34 @@
 package test;
 
 import java.io.FileNotFoundException;
-import java.time.format.DateTimeFormatter;
 
+import dao.MedicamentoParser;
 import dao.PacienteParser;
-import model.Paciente;
 import util.CSVFile;
+import util.CSVParser;
 
 /**
  * Teste de leitura do sistema de leitura de CSV.
  */
 public class TestCSV {
 
-	public static void main(String[] args) {
-		CSVFile<Paciente> reader = new CSVFile<>();
-		reader.setParser(new PacienteParser());
+	private static <T> void readFile(String filename, CSVParser<T> parser) {
+		CSVFile<T> reader = new CSVFile<>();
+		reader.setParser(parser);
 		try {
-			reader.open("data/pacientes.csv");
-			Paciente paciente = reader.readObject();
-			while (paciente != null) {
-				printPaciente(paciente);
-				paciente = reader.readObject();
+			reader.open(filename);
+			T object = (T) reader.readObject();
+			while (object != null) {
+				System.out.println(object);
+				object = (T) reader.readObject();
 			}
 		} catch (FileNotFoundException e) {
-			System.err.println("Arquivo de dados nao encontrado.");
+			System.err.println("Arquivo de dados nao encontrado: " + filename);
 		}
-		
 	}
-
-	private static void printPaciente(Paciente paciente) {
-		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-		String date = paciente.getDataNascimento().format(formatter);
-		String format = "Paciente: Nome = %s, RG = %s, Nasc.= %s";
-		String out = String.format(format,
-		                           paciente.getNome(),
-		                           paciente.getRG(),
-		                           date);
-		System.out.println(out);
+	
+	public static void main(String[] args) {
+		readFile("data/pacientes.csv", new PacienteParser());
+		readFile("data/medicamentos.csv", new MedicamentoParser());
 	}
-
 }
