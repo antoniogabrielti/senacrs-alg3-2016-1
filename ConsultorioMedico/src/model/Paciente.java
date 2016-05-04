@@ -1,6 +1,7 @@
 package model;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 public class Paciente {
 
@@ -36,4 +37,12 @@ public class Paciente {
 		return dataNascimento;
 	}
 
+	@Override
+	public String toString() {
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+		String format = "Paciente: Nome = %s, RG = %s, Nasc.= %s";
+		String date = dataNascimento.format(formatter);
+		return String.format(format, getNome(), getRG(), date);
+	}
+	
 }
