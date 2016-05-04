@@ -24,4 +24,16 @@ public class Paciente {
 				this.dataNascimento = dataNascimento;
 	}
 
+	public String getNome() {
+		return nome;
+	}
+
+	public String getRG() {
+		return rg;
+	}
+
+	public LocalDate getDataNascimento() {
+		return dataNascimento;
+	}
+
 }
