@@ -13,13 +13,15 @@ public class PacienteParser implements CSVParser<Paciente> {
 
 	@Override
 	public Paciente parseObject(String csvdata) {
-		Scanner scanner = new Scanner(csvdata);
-		scanner.useDelimiter(";");
-		Paciente paciente = new Paciente();
-		paciente.setNome(scanner.next());
-		paciente.setRG(scanner.next());
-		paciente.setDataNascimento(convertDate(scanner.next()));
-		return paciente;
+		// garante que o scanner sera fechado ao encerrar.
+		try (Scanner scanner = new Scanner(csvdata)) {
+			scanner.useDelimiter(";");
+			Paciente paciente = new Paciente();
+			paciente.setNome(scanner.next());
+			paciente.setRG(scanner.next());
+			paciente.setDataNascimento(convertDate(scanner.next()));
+			return paciente;
+		}
 	}
 
 	private LocalDate convertDate(String date) {
