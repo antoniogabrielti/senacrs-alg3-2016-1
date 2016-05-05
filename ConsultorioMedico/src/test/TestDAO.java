@@ -6,6 +6,7 @@ import java.util.Comparator;
 //import dao.MedicamentoDAO;
 import dao.MedicamentoDAOVetor;
 import dao.MedicamentoParser;
+import dao.PacienteDAOLista;
 import dao.PacienteDAOVetor;
 import dao.PacienteParser;
 import model.Medicamento;
@@ -77,14 +78,24 @@ public class TestDAO {
 		reader.setParser(new PacienteParser());
 		reader.open("data/pacientes.csv");
 
-		PacienteDAOVetor pacDAO = new PacienteDAOVetor();
+		PacienteDAOVetor vecDAO = new PacienteDAOVetor();
 		System.out.println("Loading data...");
-		pacDAO.loadData(reader);
+		vecDAO.loadData(reader);
 		System.out.println("Sorting...");
-		pacDAO.sort(indexPacienteNome);
-		pacDAO.list();
+		vecDAO.sort(indexPacienteNome);
+		vecDAO.list();
 		System.out.println("Sorting...");
-		pacDAO.sort(indexPacienteRG);
-		pacDAO.list();
+		vecDAO.sort(indexPacienteRG);
+		vecDAO.list();
+
+		PacienteDAOLista listDAO = new PacienteDAOLista();
+		System.out.println("Loading data...");
+		listDAO.loadData(reader);
+		System.out.println("Sorting...");
+		listDAO.sort(indexPacienteNome);
+		listDAO.list();
+		System.out.println("Sorting...");
+		listDAO.sort(indexPacienteRG);
+		listDAO.list();
 	}
 }
