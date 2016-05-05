@@ -16,7 +16,15 @@ public class Medicamento {
 
 	@Override
 	public String toString() {
-		String format = "Medicamento: Codigo: %x, Nome: %s";
+		String format = "Medicamento: Codigo: %016x, Nome: %s";
 		return String.format(format, codigo, nome);
+	}
+
+	public long getCodigo() {
+		return codigo;
+	}
+
+	public String getNome() {
+		return nome;
 	}
 }
