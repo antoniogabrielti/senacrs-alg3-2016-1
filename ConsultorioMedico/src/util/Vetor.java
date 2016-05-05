@@ -2,8 +2,7 @@ package util;
 
 import java.util.Comparator;
 
-public class Vetor<T>
-	implements Iterable<T>, java.lang.Iterable<T>, Sortable<T>
+public class Vetor<T> implements Iterable<T>, Sortable<T>
 {
 	private Object[] data = new Object[10];
 	private int count = 0;
