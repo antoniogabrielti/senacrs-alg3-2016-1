@@ -6,6 +6,8 @@ import java.util.Comparator;
 //import dao.MedicamentoDAO;
 import dao.MedicamentoDAOVetor;
 import dao.MedicamentoParser;
+import dao.PacienteDAO;
+import dao.PacienteDAOHashtable;
 import dao.PacienteDAOLista;
 import dao.PacienteDAOVetor;
 import dao.PacienteParser;
@@ -54,16 +56,16 @@ public class TestDAO {
 			
 	public static void main(String[] args) throws FileNotFoundException {
 		testaMedicamentoDAO();
-		testaPacienteDAO();		
+		testaPacienteDAO();
 	}
 
 	private static void testaMedicamentoDAO() throws FileNotFoundException {
 		CSVFile<Medicamento> reader = new CSVFile<>();
 		reader.setParser(new MedicamentoParser());
-		reader.open("data/medicamentos.csv");
 
 		MedicamentoDAOVetor medDAO = new MedicamentoDAOVetor();
 		System.out.println("Loading data...");
+		reader.open("data/medicamentos.csv");
 		medDAO.loadData(reader);
 		System.out.println("Sorting...");
 		medDAO.sort(indexMedicamentoNome);
@@ -76,10 +78,10 @@ public class TestDAO {
 	private static void testaPacienteDAO() throws FileNotFoundException {
 		CSVFile<Paciente> reader = new CSVFile<>();
 		reader.setParser(new PacienteParser());
-		reader.open("data/pacientes.csv");
 
 		PacienteDAOVetor vecDAO = new PacienteDAOVetor();
 		System.out.println("Loading data...");
+		reader.open("data/pacientes.csv");
 		vecDAO.loadData(reader);
 		System.out.println("Sorting...");
 		vecDAO.sort(indexPacienteNome);
@@ -90,6 +92,7 @@ public class TestDAO {
 
 		PacienteDAOLista listDAO = new PacienteDAOLista();
 		System.out.println("Loading data...");
+		reader.open("data/pacientes.csv");
 		listDAO.loadData(reader);
 		System.out.println("Sorting...");
 		listDAO.sort(indexPacienteNome);
@@ -97,5 +100,12 @@ public class TestDAO {
 		System.out.println("Sorting...");
 		listDAO.sort(indexPacienteRG);
 		listDAO.list();
+
+		PacienteDAO hashDAO = new PacienteDAOHashtable();
+		System.out.println("Loading data...");
+		reader.open("data/pacientes.csv");
+		hashDAO.loadData(reader);
+		System.out.println("RG 402750779: " +
+		                   hashDAO.getPaciente("402750779").getNome());
 	}
 }
