@@ -98,4 +98,18 @@ public class Hashtable<K, V> {
 			insert(e,hashes[0],hashes[1]);			
 		}
 	}
+
+	public void remove(K key) {
+		int[] hashes = getHashes(key);
+		for (int i = 0; i < table.length; i++) {
+			// double hash probing
+			int pos = getIndex(hashes[0], hashes[1], i);
+			if (table[pos] != null && table[pos].key.equals(key)) {
+				table[pos] = null;
+				// Sem um tratamento adequado, a busca para remover um
+				// elemento em uma tabela hash com hash duplo pode
+				// degenerar em uma busca linear.
+			}
+		}
+	}
 }
