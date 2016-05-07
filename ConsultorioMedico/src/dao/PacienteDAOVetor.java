@@ -46,8 +46,8 @@ public class PacienteDAOVetor implements PacienteDAO {
 	}
 
 	@Override
-	public void addPaciente(Paciente Paciente) {
-		dados.append(Paciente);
+	public void addPaciente(Paciente paciente) {
+		dados.append(paciente);
 		sorted = false;
 	}
 

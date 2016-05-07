@@ -23,8 +23,8 @@ public class PacienteDAOLista implements PacienteDAO {
 	}
 
 	@Override
-	public void addPaciente(Paciente Paciente) {
-		lista.append(Paciente);
+	public void addPaciente(Paciente paciente) {
+		lista.append(paciente);
 		sorted = false;
 	}
 
